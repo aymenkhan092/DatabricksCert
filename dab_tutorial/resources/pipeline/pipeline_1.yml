@@ -1,0 +1,15 @@
+resources:
+  pipelines:
+    pipeline_dab_dlt_tutorial:
+      name: DAB_DLT_tutorial
+      libraries:
+        - glob:
+            include: ../../src/DAB_DLT/transformations/**
+      schema: dlt
+      continuous: false
+      development: false
+      photon: true
+      channel: CURRENT
+      catalog: databricksbootcamp
+      serverless: true
+      root_path: ../../src/DAB_DLT
