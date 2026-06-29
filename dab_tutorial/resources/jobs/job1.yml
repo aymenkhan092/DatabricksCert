@@ -1,0 +1,12 @@
+resources:
+  jobs:
+    DAB_Tutorial:
+      name: DAB_Tutorial
+      tasks:
+        - task_key: DAB_src_tutorial
+          notebook_task:
+            notebook_path: ../../src/notebooks/data_ingestion.ipynb
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED

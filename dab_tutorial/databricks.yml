@@ -1,0 +1,48 @@
+
+bundle:
+  name: dab_tutorial
+  uuid: 8a1459b6-24aa-472d-9eb7-253caf3728ea
+
+include:
+  - resources/*.yml
+  - resources/*/*.yml
+
+
+# Variable declarations. These variables are assigned in the dev/prod targets below.
+variables:
+  catalog:
+    description: The catalog to use
+  schema:
+    description: The schema to use
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: dbc-abec5068-1f6a.cloud.databricks.com
+    permissions:
+      - user_name: aymen.khan@live.com
+        level: CAN_MANAGE
+    presets: 
+      name_prefix: ${workspace.current_user.short_name}
+      source_linked_deployment: false
+    variables:
+      catalog: workspace
+      schema: dev
+
+  prod:
+    mode: production
+    workspace:
+      host: dbc-abec5068-1f6a.cloud.databricks.com
+      root_path: /Workspace/PROD/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: workspace
+      schema: prod
+    presets:
+      name_prefix: "prod_"
+    permissions:
+      - user_name: aymen.khan@live.com
+        level: CAN_MANAGE
+      - group_name: admins
+        level: CAN_RUN
